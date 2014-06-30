@@ -11,7 +11,9 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "preview.png"
+    "preview.png",
+    "test",
+    "examples"
   ],
   "dependencies": {
     "platform": "Polymer/platform#~0.3.2",
