@@ -6,7 +6,7 @@
 <script>
 (function(window, Puppet) {
     // Creates an object based in the HTML Element prototype and Puppet
-    var PuppetJsElementPrototype = Polymer.extend(Object.create(HTMLElement.prototype), Puppet.prototype);
+    var PuppetJsElementPrototype = extend(Object.create(HTMLElement.prototype), Puppet.prototype);
 
     // Fires when an instance of the element is created
     PuppetJsElementPrototype.createdCallback = function() {
@@ -34,5 +34,22 @@
     document.registerElement('puppet-js', {
         prototype: PuppetJsElementPrototype
     });
+
+    // Lang helpers
+    // copy own properties from 'api' to 'prototype
+    function extend(prototype, api) {
+        if (prototype && api) {
+          // use only own properties of 'api'
+          Object.getOwnPropertyNames(api).forEach(function(n) {
+            // acquire property descriptor
+            var pd = Object.getOwnPropertyDescriptor(api, n);
+            if (pd) {
+              // clone property via descriptor
+              Object.defineProperty(prototype, n, pd);
+            }
+          });
+        }
+        return prototype;
+    }
 }(window, Puppet));
 </script>
