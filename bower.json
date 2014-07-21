@@ -13,7 +13,8 @@
     "bower_components",
     "preview.png",
     "test",
-    "examples"
+    "examples",
+    "Gruntfile.js"
   ],
   "dependencies": {
     "platform": "Polymer/platform#~0.3.2",
