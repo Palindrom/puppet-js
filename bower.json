@@ -1,6 +1,6 @@
 {
   "name": "puppet-js",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Custom Element to bind server-side view models with HTML nodes (HTML Templates/Web Components/AngularJs Apps) using PuppetJs communication (JSON-Patch)",
   "license": "MIT",
   "main": "src/puppet-js.html",
@@ -17,8 +17,8 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "platform": "Polymer/platform#~0.3.4",
-    "PuppetJs": "~0.1.12"
+    "platform": "Polymer/platform#~0.4.0",
+    "PuppetJs": "~0.2.0"
   },
   "devDependencies": {
     "polymer": "Polymer/polymer",
