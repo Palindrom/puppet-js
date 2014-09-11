@@ -10,7 +10,7 @@
 
     // Fires when an instance of the element is created
     PuppetJsElementPrototype.createdCallback = function() {
-        var whereToBind = this.getAttribute("ref"); 
+        var whereToBind = this.getAttribute("ref");
         // use node id or node itself;
         whereToBind = typeof whereToBind == "string" ? document.getElementById( whereToBind ) : whereToBind;
         // use server URL or window.location.href;
@@ -20,6 +20,9 @@
             whereToBind.model = obj;
             whereToBind.bindingDelegate = new PolymerExpressions(); // Make the "item" bindings work 
         });
+        this.useWebSocket = this.hasAttribute("useWebSocket") || this.useWebSocket;
+        this.ignoreAdd = this.hasAttribute("ignoreAdd") && new RegExp( this.getAttribute("ignoreAdd") ) ||
+                         this.ignoreAdd;
     };
 
     // Fires when an instance was inserted into the document
@@ -29,7 +32,16 @@
     // PuppetJsElementPrototype.detachedCallback = function() {};
 
     // Fires when an attribute was added, removed, or updated
-    // PuppetJsElementPrototype.attributeChangedCallback = function(attr, oldVal, newVal) {};
+    PuppetJsElementPrototype.attributeChangedCallback = function(attr, oldVal, newVal) {
+        switch(attr){
+            case "ignoreAdd":
+                this.ignoreAdd = newVal && new RegExp( newVal );
+                break;
+            case "useWebSocket":
+                this.useWebSocket = newVal || newVal == "";
+                break;
+        }
+    };
 
     document.registerElement('puppet-js', {
         prototype: PuppetJsElementPrototype

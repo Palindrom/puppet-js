@@ -38,10 +38,12 @@ Or [download as ZIP](https://github.com/PuppetJs/puppet-js/archive/master.zip).
 
 ## Attributes
 
-Attribute     | Options     | Default                | Description
----           | ---         | ---                    | ---
-`ref`         | *String*    |                        | (required) Id or object reference to DOM Element to bind with server
-`serverURL`   | *String*    | `window.location.href` | Data (view model) server URL
+Attribute      | Options     | Default                | Description
+---            | ---         | ---                    | ---
+`ref`          | *String*    |                        | (required) Id or object reference to DOM Element to bind with server
+`serverURL`    | *String*    | `window.location.href` | Data (view model) server URL
+`ignoreAdd`    | *String*    | `undefined`            | Regular expression with local properties to ignore (see [PuppetJS.ignoreAdd](https://github.com/PuppetJs/PuppetJs#ignoring-local-changes-ignoreadd))
+`useWebSocket` | *String*    | `false`                | Upgrade communication protocol to WebSocket (see [PuppetJS.useWebSocket](https://github.com/PuppetJs/PuppetJs#upgrading-to-websocket-usewebsocket))
 
 ## Properties, Methods, Events
 
