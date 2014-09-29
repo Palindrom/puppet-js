@@ -5,6 +5,21 @@
 
 <script>
 (function(window, Puppet) {
+    /**     
+     * There is on "onpushstate" event, so PuppetJS needs to wrap history.pushState to know when it is called      
+     * @type {Function}        
+     * @private        
+     */        
+    var history_pushState = window.history.pushState;      
+    var puppetJsInstances = [];       
+    window.history.pushState = function pushStateToPuppets(data, title, url) {       
+      history_pushState.apply(window.history, arguments);
+        for(var instanceNo = 0; instanceNo < puppetJsInstances.length; instanceNo++){
+            puppetJsInstances[instanceNo].changeState(url);
+        }     
+    };
+
+
     // Creates an object based in the HTML Element prototype and Puppet
     var PuppetJsElementPrototype = extend(Object.create(HTMLElement.prototype), Puppet.prototype);
 
@@ -15,6 +30,11 @@
         whereToBind = typeof whereToBind == "string" ? document.getElementById( whereToBind ) : whereToBind;
         // use server URL or window.location.href;
         var serverURL = this.getAttribute("serverURL") || window.location.href;
+
+        if( this.hasAttribute("observeHistory")){
+            // FIXME: possible GC trap (tomalec)
+            puppetJsInstances.push(this);
+        }
 
         Puppet.call( this, serverURL, function (obj) {
             whereToBind.model = obj;
