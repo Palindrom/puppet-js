@@ -11,15 +11,16 @@
     // Fires when an instance of the element is created
     PuppetJsElementPrototype.createdCallback = function() {
         var whereToBind = this.getAttribute("ref");
-        // use node id or node itself;
-        whereToBind = typeof whereToBind == "string" ? document.getElementById( whereToBind ) : whereToBind;
         // use server URL or window.location.href;
         var serverURL = this.getAttribute("serverURL") || window.location.href;
 
-        Puppet.call( this, serverURL, function (obj) {
-            whereToBind.model = obj;
-            whereToBind.bindingDelegate = new PolymerExpressions(); // Make the "item" bindings work 
-        });
+        if(whereToBind){
+            Puppet.call( this, serverURL, function (obj) {
+                this.bindTo(whereToBind);
+            });
+        } else {
+            Puppet.call( this, serverURL );
+        }
         this.useWebSocket = this.hasAttribute("useWebSocket") || this.useWebSocket;
         this.ignoreAdd = this.hasAttribute("ignoreAdd") && new RegExp( this.getAttribute("ignoreAdd") ) ||
                          this.ignoreAdd;
@@ -40,7 +41,19 @@
             case "useWebSocket":
                 this.useWebSocket = newVal || newVal == "";
                 break;
+            case "ref":
+                this.bindTo(newVal);
+                break;
+
         }
+    };
+
+
+    PuppetJsElementPrototype.bindTo = function(element){
+        // use node id or node itself;
+        element = typeof element == "string" ? document.getElementById( element ) : element;
+        element.model = this.obj;
+        element.bindingDelegate = new PolymerExpressions(); // Make the "item" bindings work 
     };
 
     document.registerElement('puppet-js', {
