@@ -2,25 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>&lt;puppet-js&gt; with Polymer demo</title>
-  <!-- Importing Web Component's Polyfill -->
-  <script src="//cdn.jsdelivr.net/polymer.platform/0.4.2/platform.js"></script>
-
-
-  <!-- mock server responses -->
-  <script src="../../test/lib/sinon-1.11.1.js"></script>
-  <script src="js/mockServer.js"></script>
-  
-
+  <title>PuppetJs with Polymer demo</title>
+  <script src="../../../platform/platform.js"></script>
   <link rel="import" href="../../../model-operations/model-operations.html">
   <link rel="import" href="components/my-menu-button.html">
+  <link rel="import" href="components/puppet-animation.html">
+
+  <!-- include puppet-js with dependencies -->
+  <link rel="import" href="../../src/puppet-js.html">
 
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
-
-
-  <!-- Importing Custom Elements -->
-  <link rel="import" href="../../src/puppet-js.html">
+  <!-- mock server responses -->
+  <script src="../../test/lib/jasmine/jasmine.js"></script>
+  <script>window.jasmine = jasmineRequire.core(jasmineRequire);</script>
+  <script src="../../test/lib/jasmine-ajax/lib/mock-ajax.js"></script>
+  <script src="js/mockServer.js"></script>
 </head>
 <body>
 
@@ -85,16 +82,23 @@
   </section>-->
 </article>
 
+<template id="delay" bind>
+    <puppet-js ref="test"></puppet-js>
+</template>
 
-
-<!-- Using Custom Elements -->
-<puppet-js ref="test"></puppet-js>
-<!-- 
 <script>
-  new Puppet(window.location.href, function (obj) {
-    document.getElementById('test').model = obj;
-  });
-</script> -->
+    //our mock server cannot pass through Polymer HTML Import XHR requests
+    //so we need to delay setup of the mock server until Polymer is ready
+    window.addEventListener('polymer-ready', function () {
+        createMockServer();
+        document.getElementById('delay').model = {};
+    });
+</script>
+
+<puppet-animation></puppet-animation>
+
+<footer>Puppet photo credit: <a href="https://www.flickr.com/photos/mujitra/4422575066">MIKI Yoshihito</a> (CC BY 2.0)
+</footer>
 
 </body>
 </html>
