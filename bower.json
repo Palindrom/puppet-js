@@ -17,7 +17,6 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "platform": "Polymer/platform#~0.4.2",
     "polymer": "~0.4.2",
     "PuppetJs": "~0.2.0"
   },
