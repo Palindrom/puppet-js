@@ -21,6 +21,7 @@
     "PuppetJs": "~0.2.0"
   },
   "devDependencies": {
-    "model-operations": "Polyjuice/model-operations"
+    "model-operations": "Polyjuice/model-operations",
+    "puppet-bunny": "PuppetJs/puppet-bunny"
   }
 }
