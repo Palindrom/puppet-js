@@ -1,3 +1,5 @@
+<!-- puppet-js v0.0.4 | MIT License -->
+
 <!-- include PuppetJs with dependencies -->
 <script src="../../fast-json-patch/src/json-patch-duplex.js"></script>
 <script src="../../PuppetJs/src/puppet.js"></script>
@@ -54,7 +56,7 @@
         // use node id or node itself;
         element = typeof element == "string" ? document.getElementById( element ) : element;
         element.model = this.obj;
-        element.bindingDelegate = new PolymerExpressions(); // Make the "item" bindings work 
+        element.bindingDelegate = new PolymerExpressions(); // Make the "item" bindings work
     };
 
     document.registerElement('puppet-js', {
