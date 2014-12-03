@@ -5,7 +5,8 @@
   "license": "MIT",
   "main": "src/puppet-js.html",
   "keywords": [
-    "web-components"
+    "web-components",
+    "websocket"
   ],
   "ignore": [
     "**/.*",
