@@ -37,11 +37,12 @@
 
     // Fires when an attribute was added, removed, or updated
     PuppetJsElementPrototype.attributeChangedCallback = function(attr, oldVal, newVal) {
+        attr = attr.toLowerCase();
         switch(attr){
-            case "ignoreAdd":
+            case "ignoreadd":
                 this.ignoreAdd = newVal && new RegExp( newVal );
                 break;
-            case "useWebSocket":
+            case "usewebsocket":
                 this.useWebSocket = newVal || newVal == "";
                 break;
             case "ref":
