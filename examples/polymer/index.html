@@ -83,7 +83,11 @@
 </article>
 
 <template id="delay" bind>
+    <!-- bind to element `#test` -->
     <puppet-js ref="test"></puppet-js>
+    <!-- 
+      <puppet-js ref="test" ignoreadd="_.+"></puppet-js> ignores all properties which name matches /_.+/
+    -->
 </template>
 
 <script>

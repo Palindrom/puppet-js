@@ -74,7 +74,7 @@ function createMockServer() {
     else {
       stub.responseText = "Error";
     }
-
+    console.info("Mock Server ",this.url, "\n request", data, "\n response", stub.status, stub.responseText);
     return _old.apply(this, [].slice.call(arguments));
   };
 };
