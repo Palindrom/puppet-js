@@ -60,7 +60,7 @@
         element.bindingDelegate = new PolymerExpressions(); // Make the "item" bindings work
     };
 
-    document.registerElement('puppet-js', {
+    window.PuppetJsElement = document.registerElement('puppet-js', {
         prototype: PuppetJsElementPrototype
     });
 
