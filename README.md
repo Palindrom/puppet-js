@@ -37,13 +37,21 @@ Or [download as ZIP](https://github.com/PuppetJs/puppet-js/archive/master.zip).
     ```
 
 ## Attributes
+All attributes are optional.
+See [PuppetJS options](https://github.com/PuppetJs/PuppetJs#options-constructor-parameters)
 
-Attribute      | Options     | Default                | Description
----            | ---         | ---                    | ---
-`ref`          | *String*    |                        | (required) Id or object reference to DOM Element to bind with server
-`serverURL`    | *String*    | `window.location.href` | Data (view model) server URL
-`ignoreAdd`    | *String*    | `undefined`            | Regular expression with local properties to ignore (see [PuppetJS.ignoreAdd](https://github.com/PuppetJs/PuppetJs#ignoring-local-changes-ignoreadd)). Should be given in string format, like `"_.+"`.
-`useWebSocket` | *String*    | `false`                | Upgrade communication protocol to WebSocket (see [PuppetJS.useWebSocket](https://github.com/PuppetJs/PuppetJs#upgrading-to-websocket-usewebsocket))
+Attribute          | Options       | Default                | Description
+---                | ---           | ---                    | ---
+`ref`              | *String*      |                        | (required) Id or object reference to DOM Element to bind with server
+`remoteUrl`        | *String*      | `window.location.href` | Data (view model) server URL
+`ignoreAdd`        | *String*      | `undefined`            | Regular expression with local properties to ignore (see [PuppetJS.ignoreAdd](https://github.com/PuppetJs/PuppetJs#ignoring-local-changes-ignoreadd)). Should be given in string format, like `"_.+"`.
+`useWebSocket`     | *String*      | `false`                | Upgrade communication protocol to WebSocket (see [PuppetJS.useWebSocket](https://github.com/PuppetJs/PuppetJs#upgrading-to-websocket-usewebsocket))
+`debug`            | *Boolean*     | `true`                 | Set to true to enable debugging mode
+`onRemoteChange`   | *Function*    |                        | Helper callback triggered each time a patch is obtained from server
+`localVersionPath` | *JSONPointer* |                        | local version path, set it to enable Versioned JSON Patch communication
+`remoteVersionPath`| *JSONPointer* |                        | remote version path, set it (and `localVersionPath`) to enable Versioned JSON Patch communication
+`ot`               | *Boolean*     | `false`                | true to enable OT
+`purity`           | *Boolean*     | `false`                | true to enable purist mode of OT
 
 ## Properties, Methods, Events
 

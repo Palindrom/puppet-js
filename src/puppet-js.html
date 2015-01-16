@@ -13,20 +13,31 @@
 
     // Fires when an instance of the element is created
     PuppetJsElementPrototype.createdCallback = function() {
+        var callback = undefined;
         var whereToBind = this.getAttribute("ref");
         // use server URL or window.location.href;
-        var serverURL = this.getAttribute("serverURL") || window.location.href;
+        var remoteUrl = this.getAttribute("remoteUrl") || window.location.href;
 
         if(whereToBind){
-            Puppet.call( this, serverURL, function (obj) {
+            callback = function (obj) {
                 this.bindTo(whereToBind);
-            });
-        } else {
-            Puppet.call( this, serverURL );
+            };
         }
-        this.useWebSocket = this.hasAttribute("useWebSocket") || this.useWebSocket;
-        this.ignoreAdd = this.hasAttribute("ignoreAdd") && new RegExp( this.getAttribute("ignoreAdd") ) ||
-                         this.ignoreAdd;
+        Puppet.call( this, {
+            remoteUrl:         remoteUrl,
+            callback:          callback,
+            // obj:            obj,
+            useWebSocket:      this.hasAttribute("useWebSocket") || this.useWebSocket,
+            ignoreAdd:         this.hasAttribute("ignoreAdd") && 
+                                    new RegExp( this.getAttribute("ignoreAdd") ) ||
+                                this.ignoreAdd,
+            debug:             this.hasAttribute("debug") || this.debug,
+            // onRemoteChange: ?,
+            localVersionPath:  this.getAttribute("localVersionPath"),
+            remoteVersionPath: this.getAttribute("remoteVersionPath"),
+            ot:                this.hasAttribute("ot") || this.ot,
+            purity:            this.hasAttribute("purity") || this.purity
+        });
     };
 
     // Fires when an instance was inserted into the document
@@ -45,8 +56,11 @@
             case "usewebsocket":
                 this.useWebSocket = newVal || newVal == "";
                 break;
+            case "debug":
+                this.debug = newVal || newVal == "";
+                break;
             case "ref":
-                this.bindTo(newVal);
+                this.bindTo(newVal); // XXX: Migh be called before ready! (tomalec)
                 break;
 
         }
