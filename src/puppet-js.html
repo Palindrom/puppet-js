@@ -25,8 +25,8 @@
             Puppet.call( this, serverURL );
         }
         this.useWebSocket = this.hasAttribute("useWebSocket") || this.useWebSocket;
-        this.ignoreAdd = this.hasAttribute("ignoreAdd") && new RegExp( this.getAttribute("ignoreAdd") ) ||
-                         this.ignoreAdd;
+        this.ignorePath = this.hasAttribute("ignorePath") && new RegExp( this.getAttribute("ignorePath") ) ||
+                         this.ignorePath;
     };
 
     // Fires when an instance was inserted into the document
@@ -40,7 +40,9 @@
         attr = attr.toLowerCase();
         switch(attr){
             case "ignoreadd":
-                this.ignoreAdd = newVal && new RegExp( newVal );
+                throw "ignoreAdd is deprecated and removed, use ignorePath instead";
+            case "ignorepath":
+                this.ignorePath = newVal && new RegExp(newVal);
                 break;
             case "usewebsocket":
                 this.useWebSocket = newVal || newVal == "";
